@@ -13,7 +13,7 @@ async function run() {
 
   const github = new GitHubClient(token)
 
-console.log("testing PR bot")
+  console.log("PR bot")
 
   const diff = await github.getPullRequestDiff(owner, repo, pull_number)
 
