@@ -2,7 +2,7 @@ name: "AI PR Review Bot"
 description: "AI-powered pull request reviewer"
 
 runs:
-  using: "node20"
+  using: "node22"
   main: "dist/index.js"
 
 inputs:
