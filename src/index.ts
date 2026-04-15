@@ -17,7 +17,7 @@ async function run() {
 
   const githubClient = new GitHubClient(token)
 
-  console.log("Fetching PR diff...")
+  console.log("AI bot testing action")
 
   const diff = await githubClient.getPullRequestDiff(
     owner,

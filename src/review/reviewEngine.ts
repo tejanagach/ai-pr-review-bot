@@ -9,22 +9,25 @@ export interface ReviewResult {
 export class ReviewEngine {
   constructor(private provider: LLMProvider) {}
 
-async reviewChunks(chunks: DiffChunk[]): Promise<ReviewResult[]> {
-  const promises = chunks.map(async (chunk) => {
-    const prompt = this.buildPrompt(chunk)
+  async reviewChunks(chunks: DiffChunk[]): Promise<ReviewResult[]> {
+    const results: ReviewResult[] = []
 
-    const response = await this.provider.generateReview({
-      prompt
-    })
+    for (const chunk of chunks) {
+      const prompt = this.buildPrompt(chunk)
 
-    return {
-      file: chunk.file,
-      review: response.content
+      const response = await this.provider.generateReview({
+        prompt
+      })
+
+      results.push({
+        file: chunk.file,
+        review: response.content
+      })
     }
-  })
 
-  return Promise.all(promises)
-}
+    return results
+  }
+
   private buildPrompt(chunk: DiffChunk): string {
     return `
 You are a senior software engineer reviewing a pull request.
