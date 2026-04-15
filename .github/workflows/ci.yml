@@ -15,13 +15,29 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
         run: npm run build
+
+      # ⭐ Install Ollama
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+
+      # ⭐ Start Ollama server
+      - name: Start Ollama
+        run: |
+          ollama serve &
+          sleep 5
+
+      # ⭐ Pull the model
+      - name: Pull Qwen model
+        run: |
+          ollama pull qwen3:4b
 
       - name: Run AI PR Review Bot
         uses: ./
