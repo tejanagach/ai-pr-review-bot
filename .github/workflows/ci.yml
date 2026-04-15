@@ -32,7 +32,7 @@ jobs:
       - name: Start Ollama
         run: |
           ollama serve &
-          sleep 5
+          sleep 15
 
       # ⭐ Pull the model
       - name: Pull Qwen model
